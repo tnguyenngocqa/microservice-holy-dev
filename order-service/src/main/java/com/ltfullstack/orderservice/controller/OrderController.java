@@ -7,6 +7,7 @@ import com.ltfullstack.orderservice.model.OrderResponse;
 import com.ltfullstack.orderservice.repository.OrderRepository;
 import com.ltfullstack.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +35,14 @@ public class OrderController {
 
     @PostMapping
     public Order placeOrder(@RequestBody Order order) {
+        Long userId = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        order.setUserId(userId);
         return orderService.createOrder(order);
     }
+//    @PostMapping
+//    public Order placeOrder(@RequestBody Order order) {
+//        return orderService.createOrder(order);
+//    }
 
 //    @PostMapping
 //    public Order createOrder(@RequestBody Order order) {
