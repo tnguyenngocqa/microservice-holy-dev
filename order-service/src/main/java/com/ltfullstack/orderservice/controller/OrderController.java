@@ -5,6 +5,7 @@ import com.ltfullstack.orderservice.UserDto;
 import com.ltfullstack.orderservice.model.Order;
 import com.ltfullstack.orderservice.model.OrderResponse;
 import com.ltfullstack.orderservice.repository.OrderRepository;
+import com.ltfullstack.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,8 @@ public class OrderController {
     // call feign client
     private final UserClient userClient;
 
+    private final OrderService orderService;
+
     @GetMapping("/{id}")
     public OrderResponse getOrderById(@PathVariable Long id) {
         Order order = orderRepository.findById(id).orElseThrow();
@@ -30,9 +33,14 @@ public class OrderController {
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody Order order) {
-        return orderRepository.save(order);
+    public Order placeOrder(@RequestBody Order order) {
+        return orderService.createOrder(order);
     }
+
+//    @PostMapping
+//    public Order createOrder(@RequestBody Order order) {
+//        return orderRepository.save(order);
+//    }
 
     @GetMapping
     public List<Order> getAllOrders() {
