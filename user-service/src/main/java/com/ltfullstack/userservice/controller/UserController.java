@@ -3,7 +3,9 @@ package com.ltfullstack.userservice.controller;
 import com.ltfullstack.userservice.UserDto;
 import com.ltfullstack.userservice.model.User;
 import com.ltfullstack.userservice.repository.UserRepository;
+import com.ltfullstack.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,16 +16,22 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @PostMapping
+    @CacheEvict(value = "allUsers", allEntries = true)
     public User create(@RequestBody User user) {
         return userRepository.save(user);
     }
 
     @GetMapping
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userService.getAllUsers();
     }
+//    @GetMapping
+//    public List<User> getAllUsers() {
+//        return userRepository.findAll();
+//    }
 
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable Long id) {
