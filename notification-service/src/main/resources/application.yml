@@ -18,7 +18,7 @@ spring:
     host: live.smtp.mailtrap.io
     port: 587
     username: api
-    password: # <YOUR_API_TOKEN>
+    password: 10c03675681e82d0f68a94fd51676308 # <YOUR_API_TOKEN>
     properties:
       mail:
         smtp:

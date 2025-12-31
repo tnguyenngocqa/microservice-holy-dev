@@ -40,10 +40,10 @@ public class UserController {
         return new UserDto(user.getId(), user.getName(), user.getEmail());
     }
 
-    @GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        return new UserDto(user.getId(), user.getName(), user.getEmail());
-    }
+//    @GetMapping("/{id}")
+//    public UserDto getUserById(@PathVariable Long id) {
+//        User user = userRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//        return new UserDto(user.getId(), user.getName(), user.getEmail());
+//    }
 }

@@ -34,10 +34,16 @@ spring:
           predicates:
             - Path=/api/users/**
 
+        - id: user-service-auth
+          uri: lb://user-service
+          predicates:
+            - Path=/api/auth/**
+
         - id: order-service
           uri: lb://order-service     # tương tự
           predicates:
             - Path=/api/orders/**
+
 
 eureka:
   client:
